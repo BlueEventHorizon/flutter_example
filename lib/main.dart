@@ -25,7 +25,9 @@ class HomeScreen extends StatelessWidget {
       tabBar: CupertinoTabBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.book_solid), label: 'Articled')
+              icon: Icon(CupertinoIcons.book_solid), label: 'Articled'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.eye_solid), label: 'Views')
         ],
       ),
       tabBuilder: (context, index) {
@@ -33,32 +35,13 @@ class HomeScreen extends StatelessWidget {
           builder: (BuildContext context) {
             return CupertinoPageScaffold(
               navigationBar: CupertinoNavigationBar(
-                middle: Text('Page 1 of tab $index'),
-              ),
+                  middle: (index == 0) ? Text('Article') : Text('Views')),
               child: Center(
-                child: CupertinoButton(
-                  child: const Text('Next page'),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      CupertinoPageRoute<void>(
-                        builder: (BuildContext context) {
-                          return CupertinoPageScaffold(
-                            navigationBar: CupertinoNavigationBar(
-                              middle: Text('Page 2 of tab $index'),
-                            ),
-                            child: Center(
-                              child: CupertinoButton(
-                                child: const Text('Back'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
+                child: Text(
+                  'This is tab #$index',
+                  style: CupertinoTheme.of(context)
+                      .textTheme
+                      .navLargeTitleTextStyle,
                 ),
               ),
             );
